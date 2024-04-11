@@ -1,14 +1,14 @@
 #include <stdio.h>
 int main() {
-    double num;
-    scanf("%lf", &num);
-    if(0 >= num && num <= 25.0000){
-        printf("Intervalo (0,25]\n");
-    } else if(25 > num && num <= 50.0000) {
+    float num;
+    scanf("%f", &num);
+    if (num >= 0 && num <= 25) {
+        printf("Intervalo [0,25]\n");
+    } else if (num > 25 && num <= 50) {
         printf("Intervalo (25,50]\n");
-    } else if(50 > num && num <= 75.0000) {
+    } else if (num > 50 && num <= 75) {
         printf("Intervalo (50,75]\n");
-    } else if (75 > num && num <= 100.0000) {
+    } else if (num > 75 && num <= 100) {
         printf("Intervalo (75,100]\n");
     } else {
         printf("Fora de intervalo\n");
