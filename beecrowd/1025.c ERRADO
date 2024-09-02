@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+struct imovel {
+    int moradores;
+    double consumo;
+};
+
+int main() {
+    int N, n = 1;
+    struct imovel imoveis[1000000];  
+    double pessoasTotal, mediaTotal;
+
+    while (scanf("%d", &N) && N != 0) {
+        pessoasTotal = 0;
+        mediaTotal = 0;
+
+        for (int i = 0; i < N; i++) {
+            scanf("%d %lf", &imoveis[i].moradores, &imoveis[i].consumo);
+            pessoasTotal += imoveis[i].moradores;
+            mediaTotal += imoveis[i].consumo;
+        }
+
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = 0; j < N - i - 1; j++) {
+                double consumoPorPessoaAtual = imoveis[j].consumo / imoveis[j].moradores;
+                double consumoPorPessoaProximo = imoveis[j + 1].consumo / imoveis[j + 1].moradores;
+
+                if (consumoPorPessoaAtual > consumoPorPessoaProximo) {
+                    struct imovel temp = imoveis[j];
+                    imoveis[j] = imoveis[j + 1];
+                    imoveis[j + 1] = temp;
+                }
+            }
+        }
+
+        printf("Cidade# %d:\n", n++);
+        for (int i = 0; i < N; i++) {
+            int media = (int)(imoveis[i].consumo / imoveis[i].moradores);
+            printf("%d-%d", imoveis[i].moradores, media);
+            if (i < N - 1) printf(" ");
+        }
+        printf("\nConsumo medio: %.2f m3.\n", mediaTotal / pessoasTotal);
+    }
+
+    return 0;
+}
